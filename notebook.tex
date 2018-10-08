@@ -1,0 +1,1241 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ch2-example-housing}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{1. Get the Data}\label{get-the-data}
+
+\subsection{1.1 Loading data into pandas and basic
+exploration}\label{loading-data-into-pandas-and-basic-exploration}
+
+Most of the code is from Hands on Machine Learning with Scikit Lear nand
+Tensorflow by O'Reilly
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{tarfile}
+        \PY{k+kn}{from} \PY{n+nn}{six}\PY{n+nn}{.}\PY{n+nn}{moves} \PY{k}{import} \PY{n}{urllib}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{DOWNLOAD\PYZus{}ROOT} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://raw.githubusercontent.com/ageron/handson\PYZhy{}ml/master/}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{HOUSING\PYZus{}PATH} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{datasets}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{housing}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{HOUSING\PYZus{}URL} \PY{o}{=} \PY{n}{DOWNLOAD\PYZus{}ROOT} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{datasets/housing/housing.tgz}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{fetch\PYZus{}housing\PYZus{}data}\PY{p}{(}\PY{n}{housing\PYZus{}url}\PY{o}{=}\PY{n}{HOUSING\PYZus{}URL}\PY{p}{,} \PY{n}{housing\PYZus{}path}\PY{o}{=}\PY{n}{HOUSING\PYZus{}PATH}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{n}{housing\PYZus{}path}\PY{p}{)}\PY{p}{:}
+                \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{housing\PYZus{}path}\PY{p}{)}
+            \PY{n}{tgz\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{housing\PYZus{}path}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{housing.tgz}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{urllib}\PY{o}{.}\PY{n}{request}\PY{o}{.}\PY{n}{urlretrieve}\PY{p}{(}\PY{n}{housing\PYZus{}url}\PY{p}{,} \PY{n}{tgz\PYZus{}path}\PY{p}{)}
+            \PY{n}{housing\PYZus{}tgz} \PY{o}{=} \PY{n}{tarfile}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{tgz\PYZus{}path}\PY{p}{)}
+            \PY{n}{housing\PYZus{}tgz}\PY{o}{.}\PY{n}{extractall}\PY{p}{(}\PY{n}{path}\PY{o}{=}\PY{n}{housing\PYZus{}path}\PY{p}{)}
+            \PY{n}{housing\PYZus{}tgz}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{load\PYZus{}housing\PYZus{}data}\PY{p}{(}\PY{n}{housing\PYZus{}path}\PY{o}{=}\PY{n}{HOUSING\PYZus{}PATH}\PY{p}{)}\PY{p}{:}
+            \PY{n}{csv\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{housing\PYZus{}path}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{housing.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{csv\PYZus{}path}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{fetch\PYZus{}housing\PYZus{}data}\PY{p}{(}\PY{p}{)}
+        \PY{n}{housing} \PY{o}{=} \PY{n}{load\PYZus{}housing\PYZus{}data}\PY{p}{(}\PY{p}{)}
+        \PY{n}{housing}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}show top five rows}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}    longitude  latitude  housing\_median\_age  total\_rooms  total\_bedrooms  \textbackslash{}
+        0    -122.23     37.88                41.0        880.0           129.0   
+        1    -122.22     37.86                21.0       7099.0          1106.0   
+        2    -122.24     37.85                52.0       1467.0           190.0   
+        3    -122.25     37.85                52.0       1274.0           235.0   
+        4    -122.25     37.85                52.0       1627.0           280.0   
+        
+           population  households  median\_income  median\_house\_value ocean\_proximity  
+        0       322.0       126.0         8.3252            452600.0        NEAR BAY  
+        1      2401.0      1138.0         8.3014            358500.0        NEAR BAY  
+        2       496.0       177.0         7.2574            352100.0        NEAR BAY  
+        3       558.0       219.0         5.6431            341300.0        NEAR BAY  
+        4       565.0       259.0         3.8462            342200.0        NEAR BAY  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{housing}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 10 columns):
+longitude             20640 non-null float64
+latitude              20640 non-null float64
+housing\_median\_age    20640 non-null float64
+total\_rooms           20640 non-null float64
+total\_bedrooms        20433 non-null float64
+population            20640 non-null float64
+households            20640 non-null float64
+median\_income         20640 non-null float64
+median\_house\_value    20640 non-null float64
+ocean\_proximity       20640 non-null object
+dtypes: float64(9), object(1)
+memory usage: 1.6+ MB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} see all values of a categorical attribute}
+        \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ocean\PYZus{}proximity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <1H OCEAN     9136
+        INLAND        6551
+        NEAR OCEAN    2658
+        NEAR BAY      2290
+        ISLAND           5
+        Name: ocean\_proximity, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} get summary of numerical attributes}
+         \PY{n}{housing}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}           longitude      latitude  housing\_median\_age   total\_rooms  \textbackslash{}
+         count  20640.000000  20640.000000        20640.000000  20640.000000   
+         mean    -119.569704     35.631861           28.639486   2635.763081   
+         std        2.003532      2.135952           12.585558   2181.615252   
+         min     -124.350000     32.540000            1.000000      2.000000   
+         25\%     -121.800000     33.930000           18.000000   1447.750000   
+         50\%     -118.490000     34.260000           29.000000   2127.000000   
+         75\%     -118.010000     37.710000           37.000000   3148.000000   
+         max     -114.310000     41.950000           52.000000  39320.000000   
+         
+                total\_bedrooms    population    households  median\_income  \textbackslash{}
+         count    20433.000000  20640.000000  20640.000000   20640.000000   
+         mean       537.870553   1425.476744    499.539680       3.870671   
+         std        421.385070   1132.462122    382.329753       1.899822   
+         min          1.000000      3.000000      1.000000       0.499900   
+         25\%        296.000000    787.000000    280.000000       2.563400   
+         50\%        435.000000   1166.000000    409.000000       3.534800   
+         75\%        647.000000   1725.000000    605.000000       4.743250   
+         max       6445.000000  35682.000000   6082.000000      15.000100   
+         
+                median\_house\_value  
+         count        20640.000000  
+         mean        206855.816909  
+         std         115395.615874  
+         min          14999.000000  
+         25\%         119600.000000  
+         50\%         179700.000000  
+         75\%         264725.000000  
+         max         500001.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} histogram}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{housing}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Try to understand how the data was computed
+\item
+  attributes have very different scales. will be discussed later in this
+  chapter when exploring Section \ref{feature-scaling}
+\item
+  many of these histograms are \textbf{tail heavy}, meaning they extend
+  much farther to the right of the median than to the left. This makes
+  it harder for some ML algorithms to detect patterns. Try to transform
+  these attributes to have a more bell-shaped distribution
+\end{enumerate}
+
+    \subsection{1.2 Creating a test set without using
+sklearn}\label{creating-a-test-set-without-using-sklearn}
+
+    \emph{note: just use scikit learn's train test split}
+
+\textbf{split\_train\_test function is should not be used because
+everytime it is ran, it generates a different test set, meaning over
+time, the algorithm will see the whole dataset} There are many many ways
+to ensure your test set is stable across multiple runs. This example
+\textbf{split\_train\_test\_by\_id} is straight out of the textbook. Try
+to use another way.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k}{def} \PY{n+nf}{split\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{test\PYZus{}ratio}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} randomly permute a sequence}
+             \PY{n}{shuffled\PYZus{}indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} set test set size as the input \PYZpc{} of size of data (usually 20\PYZpc{})}
+             \PY{n}{test\PYZus{}set\PYZus{}size} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{o}{*} \PY{n}{test\PYZus{}ratio}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} set part of the shuffled data as test set}
+             \PY{n}{test\PYZus{}indices} \PY{o}{=} \PY{n}{shuffled\PYZus{}indices}\PY{p}{[}\PY{p}{:}\PY{n}{test\PYZus{}set\PYZus{}size}\PY{p}{]}
+             \PY{n}{train\PYZus{}indices} \PY{o}{=} \PY{n}{shuffled\PYZus{}indices}\PY{p}{[}\PY{n}{test\PYZus{}set\PYZus{}size}\PY{p}{:}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} iloc = Purely integer\PYZhy{}location based indexing for selection by position. }
+             \PY{k}{return} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}indices}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{test\PYZus{}indices}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} call split\PYZus{}train\PYZus{}test function to create a train\PYZus{}set and test\PYZus{}set}
+         \PY{n}{train\PYZus{}set}\PY{p}{,} \PY{n}{test\PYZus{}set} \PY{o}{=} \PY{n}{split\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{housing}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train +}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+16512 train + 4128 test
+
+    \end{Verbatim}
+
+    \subsubsection{split\_train\_test\_by\_id}\label{split_train_test_by_id}
+
+This function ensures that the test set will remain consistent across
+multiple runs, even if you refresh the dataset.
+
+\paragraph{HOW?}\label{how}
+
+It uses each instance's identifier to decide whether or not it should go
+in the test set (assuming instances have a unique and immutable
+identifier). For example, you can compute a hash of each instance's
+identifier, keep only the last byte of the hash and put the instance in
+the test set if this value is lower or equal to 51 (
+\textasciitilde{}20\% of 256).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{import} \PY{n+nn}{hashlib}
+         
+         \PY{k}{def} \PY{n+nf}{test\PYZus{}set\PYZus{}check}\PY{p}{(}\PY{n}{identifier}\PY{p}{,} \PY{n}{test\PYZus{}ratio}\PY{p}{,} \PY{n+nb}{hash}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{hash}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{int64}\PY{p}{(}\PY{n}{identifier}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{digest}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{256} \PY{o}{*} \PY{n}{test\PYZus{}ratio}
+         
+         \PY{k}{def} \PY{n+nf}{split\PYZus{}train\PYZus{}test\PYZus{}by\PYZus{}id}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{test\PYZus{}ratio}\PY{p}{,} \PY{n}{id\PYZus{}column}\PY{p}{,} \PY{n+nb}{hash}\PY{o}{=}\PY{n}{hashlib}\PY{o}{.}\PY{n}{md5}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} set identifier col as ids}
+             \PY{n}{ids} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{id\PYZus{}column}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} set test set as }
+             \PY{n}{in\PYZus{}test\PYZus{}set} \PY{o}{=} \PY{n}{ids}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{id\PYZus{}}\PY{p}{:} \PY{n}{test\PYZus{}set\PYZus{}check}\PY{p}{(}\PY{n}{id\PYZus{}}\PY{p}{,} \PY{n}{test\PYZus{}ratio}\PY{p}{,} \PY{n+nb}{hash}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{in\PYZus{}test\PYZus{}set}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{in\PYZus{}test\PYZus{}set}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} create an index column that we can use as an identifier column}
+         \PY{c+c1}{\PYZsh{} can skip if your data already has an identifier column}
+         \PY{c+c1}{\PYZsh{} just input that column name instead of \PYZdq{}index\PYZdq{} in split\PYZus{}train\PYZus{}test\PYZus{}by\PYZus{}id param}
+         
+         \PY{c+c1}{\PYZsh{} moves the original index adds an \PYZsq{}index\PYZsq{} column and create new index}
+         \PY{n}{housing\PYZus{}with\PYZus{}id} \PY{o}{=} \PY{n}{housing}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)} 
+         
+         \PY{c+c1}{\PYZsh{} input dataset with index col, test ratio, column name of identifier col}
+         \PY{n}{train\PYZus{}set}\PY{p}{,} \PY{n}{test\PYZus{}set} \PY{o}{=} \PY{n}{split\PYZus{}train\PYZus{}test\PYZus{}by\PYZus{}id}\PY{p}{(}\PY{n}{housing\PYZus{}with\PYZus{}id}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{1.3 Scikit-Learn
+train\_test\_split}\label{scikit-learn-train_test_split}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{n}{train\PYZus{}set}\PY{p}{,} \PY{n}{test\PYZus{}set} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{housing}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{1.4 Stratified Sampling}\label{stratified-sampling}
+
+If your dataset is not large enough, you may run into the risk of a
+significant sampling bias. Try to ensure that the sample is
+representative of the whole population.
+
+\subsubsection{Stratified sampling}\label{stratified-sampling-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  divide the population into homogeneous subgroups called
+  \textbf{strata}
+\item
+  ensure the right number of instances is sampled from each stratum to
+  guarantee that the test set is representative of the overall
+  population.
+\end{enumerate}
+
+Each stratum should be large enough and you should not have too many
+strata.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} if median income is a very important attribute and you want to ensure}
+         \PY{c+c1}{\PYZsh{} the test set is representative of various categories of income}
+         \PY{c+c1}{\PYZsh{} create an income category }
+         
+         \PY{c+c1}{\PYZsh{} 1. divide median income by 1.5 (to limit \PYZsh{} of income categories)}
+         \PY{c+c1}{\PYZsh{} 2. round up using ceil (for discrete categories)}
+         \PY{c+c1}{\PYZsh{} 3. Merge all categories greater than 5 into category 5}
+         \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{income\PYZus{}cat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}income}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{l+m+mf}{1.5}\PY{p}{)}
+         \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{income\PYZus{}cat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{income\PYZus{}cat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{5.0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} use sklearn for stratified sampling using income category we created above}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{StratifiedShuffleSplit}
+         
+         \PY{n}{split} \PY{o}{=} \PY{n}{StratifiedShuffleSplit}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+         \PY{k}{for} \PY{n}{train\PYZus{}index}\PY{p}{,} \PY{n}{test\PYZus{}index} \PY{o+ow}{in} \PY{n}{split}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{housing}\PY{p}{,} \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{income\PYZus{}cat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{strat\PYZus{}train\PYZus{}set} \PY{o}{=} \PY{n}{housing}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{train\PYZus{}index}\PY{p}{]}
+             \PY{n}{strat\PYZus{}test\PYZus{}set} \PY{o}{=} \PY{n}{housing}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{test\PYZus{}index}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} checking theincome category  proportions of the dataset}
+         \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{income\PYZus{}cat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{housing}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} 3.0    0.350581
+         2.0    0.318847
+         4.0    0.176308
+         5.0    0.114438
+         1.0    0.039826
+         Name: income\_cat, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} remove the income\PYZus{}cat attribute now that sample has been made.}
+         \PY{k}{for} \PY{n}{set\PYZus{}} \PY{o+ow}{in} \PY{p}{(}\PY{n}{strat\PYZus{}train\PYZus{}set}\PY{p}{,} \PY{n}{strat\PYZus{}test\PYZus{}set}\PY{p}{)}\PY{p}{:}
+             \PY{n}{set\PYZus{}}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{income\PYZus{}cat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{2. Discover and Visualize the Data to Gain
+Insights}\label{discover-and-visualize-the-data-to-gain-insights}
+
+\subsection{2.1 Visualizing Geographical
+Data}\label{visualizing-geographical-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{housing}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scatter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x26ea06f6c18>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} using alpha param to make it easier to visualize when data has high density}
+         \PY{n}{housing}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scatter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x26e9e0715c0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} housing prices}
+         \PY{c+c1}{\PYZsh{} radius of circle = district\PYZsq{}s population (option s)}
+         \PY{c+c1}{\PYZsh{} color = price (option c)}
+         \PY{c+c1}{\PYZsh{} we will use a predefined color map called jet (option cmap)}
+         \PY{c+c1}{\PYZsh{} (ranges from blue to red [low to high])}
+         
+         \PY{n}{housing}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scatter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,} 
+                      \PY{n}{s}\PY{o}{=}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{population}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{population}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} 
+                      \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{get\PYZus{}cmap}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{jet}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{colorbar}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                     \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} <matplotlib.legend.Legend at 0x26e9defa668>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{2.2 Looking for
+Correlations}\label{looking-for-correlations}
+
+If the dataset is not too large, you can easily compute standard
+correlation coefficient (Pearson's r) between every pair of attributes
+using corr()
+
+\textbf{correlation coefficient only measures linear corr. may
+completely miss nonlinear relationships}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{corr\PYZus{}matrix} \PY{o}{=} \PY{n}{housing}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} correlation of attributes vs median house value}
+         \PY{n}{corr\PYZus{}matrix}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} median\_house\_value    1.000000
+         median\_income         0.688075
+         income\_cat            0.643892
+         total\_rooms           0.134153
+         housing\_median\_age    0.105623
+         households            0.065843
+         total\_bedrooms        0.049686
+         population           -0.024650
+         longitude            -0.045967
+         latitude             -0.144160
+         Name: median\_house\_value, dtype: float64
+\end{Verbatim}
+            
+    \subsubsection{using pandas' scatter\_matrix function to check
+correlation}\label{using-pandas-scatter_matrix-function-to-check-correlation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{scatter\PYZus{}matrix}
+         
+         \PY{n}{attributes} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}income}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{housing\PYZus{}median\PYZus{}age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{housing}\PY{p}{[}\PY{n}{attributes}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} array([[<matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9EA8B0F0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9EBF3828>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9EC14E10>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9EC424E0>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9EC68B70>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9EC68BA8>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9ECC28D0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9ECEAF60>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9FDFB630>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026E9FE22CC0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026EA0584390>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026EA05ABA20>],
+                [<matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026EA05DF0F0>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026EA0775780>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026EA091DE10>,
+                 <matplotlib.axes.\_subplots.AxesSubplot object at 0x0000026EA094E4E0>]],
+               dtype=object)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} median income is the most promising attribute to predict median house value}
+         \PY{n}{housing}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scatter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}income}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x26ea367de80>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{2.3 Experimenting with Attribute
+Combinations}\label{experimenting-with-attribute-combinations}
+
+Before preparing the data, you may want to try out various attribute
+combinations. For example, combine \# of rooms in a district with \# of
+housesholds to create \textbf{\# of rooms per household}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rooms\PYZus{}per\PYZus{}household}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{households}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bedrooms\PYZus{}per\PYZus{}room}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}rooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{population\PYZus{}per\PYZus{}household}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{population}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{households}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{corr\PYZus{}matrix} \PY{o}{=} \PY{n}{housing}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{corr\PYZus{}matrix}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} median\_house\_value          1.000000
+         median\_income               0.688075
+         income\_cat                  0.643892
+         rooms\_per\_household         0.151948
+         total\_rooms                 0.134153
+         housing\_median\_age          0.105623
+         households                  0.065843
+         total\_bedrooms              0.049686
+         population\_per\_household   -0.023737
+         population                 -0.024650
+         longitude                  -0.045967
+         latitude                   -0.144160
+         bedrooms\_per\_room          -0.255880
+         Name: median\_house\_value, dtype: float64
+\end{Verbatim}
+            
+    \section{3. Preparing the Data for ML
+Algorithms}\label{preparing-the-data-for-ml-algorithms}
+
+You should write functions to do that instead of doing it manually.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  this will allow you to reproduce these transformations easily on any
+  dataset
+\item
+  you will gradually build a library of transformation functions you can
+  reuse in the future projects
+\item
+  you can use these functions in your live system to transform the new
+  data before feeding it into your algorithms
+\item
+  this will make it possible for you to easily try various
+  transformations and see which combination of transformations works
+  best
+\end{enumerate}
+
+\textbf{For Capstone, having functions for it means our client can run
+it just by feeding in raw data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{} separate predictors and labels}
+         
+         \PY{c+c1}{\PYZsh{} create a copy of training set without the median\PYZus{}house\PYZus{}value}
+         \PY{n}{housing} \PY{o}{=} \PY{n}{strat\PYZus{}train\PYZus{}set}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{} sidenote: drop() creates a copy of the data without affecting original}
+         
+         \PY{c+c1}{\PYZsh{} create a separate label list of median\PYZus{}house\PYZus{}value}
+         \PY{n}{housing\PYZus{}labels} \PY{o}{=} \PY{n}{strat\PYZus{}train\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median\PYZus{}house\PYZus{}value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{3.1 Data Cleaning}\label{data-cleaning}
+
+\subsubsection{Missing Features}\label{missing-features}
+
+Most ML algo can't deal with missing features.
+
+We have 3 options
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  get rid of corresponding districts (rows) - dropna()
+\item
+  get rid of whole attribute - drop()
+\item
+  Set the values to some value (zero, mean, median, etc) - fillna()
+  \textbf{save fill value to apply on test set later}
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} total\PYZus{}bedrooms attribute has missing values.}
+        \PY{n}{housing}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} option 1}
+        \PY{n}{housing}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} option 2}
+        \PY{n}{median} \PY{o}{=} \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}option 3}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} we save fill value so we can apply the same value to test set}
+        \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total\PYZus{}bedrooms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{median}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{or... use sklearn Imputer
+class......}\label{or...-use-sklearn-imputer-class......}
+
+median/mean only works on numerical attributes, so must make a copy of
+data without text attributes
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{Imputer}
+         \PY{n}{imputer} \PY{o}{=} \PY{n}{Imputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} set values with median of attribute}
+         
+         \PY{c+c1}{\PYZsh{} make a copy without ocean\PYZus{}proximity}
+         \PY{n}{housing\PYZus{}num} \PY{o}{=} \PY{n}{housing}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ocean\PYZus{}proximity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{imputer}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{housing\PYZus{}num}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} Imputer(axis=0, copy=True, missing\_values='NaN', strategy='median', verbose=0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} imputer calculates mean/median for all attributes. }
+         \PY{c+c1}{\PYZsh{} this can be useful in the future if other attributes introduce missing data}
+         \PY{n}{imputer}\PY{o}{.}\PY{n}{statistics\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} array([-118.51  ,   34.26  ,   29.    , 2119.5   ,  433.    , 1164.    ,
+                 408.    ,    3.5409])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{housing\PYZus{}num}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} array([-118.51  ,   34.26  ,   29.    , 2119.5   ,  433.    , 1164.    ,
+                 408.    ,    3.5409])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} replace the attribute column in training set with imputer filled column   }
+         \PY{n}{X} \PY{o}{=} \PY{n}{imputer}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{housing\PYZus{}num}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} put it back in dataframe with numpy}
+         \PY{n}{housing\PYZus{}tr} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n}{housing\PYZus{}num}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{3.2 Handling Text and Categorical
+Attributes}\label{handling-text-and-categorical-attributes}
+
+\subsubsection{Convert text labels to numbers using sklearn
+LabelEncoder}\label{convert-text-labels-to-numbers-using-sklearn-labelencoder}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+         \PY{n}{encoder} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat} \PY{o}{=} \PY{n}{housing}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ocean\PYZus{}proximity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{housing\PYZus{}cat\PYZus{}encoded} \PY{o}{=} \PY{n}{encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{housing\PYZus{}cat}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}encoded}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} array([0, 0, 4, {\ldots}, 1, 0, 3], dtype=int64)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{} encoder.classes\PYZus{} shows original values}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{encoder}\PY{o}{.}\PY{n}{classes\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['<1H OCEAN' 'INLAND' 'ISLAND' 'NEAR BAY' 'NEAR OCEAN']
+
+    \end{Verbatim}
+
+    \subsubsection{One-Hot Encoding}\label{one-hot-encoding}
+
+in ML algorithms, categorical values close to each other are assumed to
+be more similar than two distant values. (for example: categories 0 and
+1 are more similar than categories 0 and 4)
+
+Many times, this is not the case with categorical values turned from
+text.
+
+We must one hot encode the attribute in order to make fix this issue.
+
+This means turning an attribute of {[}0,1,2,3,4{]} into five columns of
+{[}0,1{]} for each category of the original attribute.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OneHotEncoder}
+         \PY{n}{encoder} \PY{o}{=} \PY{n}{OneHotEncoder}\PY{p}{(}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}1hot} \PY{o}{=} \PY{n}{encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{housing\PYZus{}cat\PYZus{}encoded}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}1hot}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} <16512x5 sparse matrix of type '<class 'numpy.float64'>'
+         	with 16512 stored elements in Compressed Sparse Row format>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{housing\PYZus{}cat\PYZus{}1hot}\PY{o}{.}\PY{n}{toarray}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} array([[1., 0., 0., 0., 0.],
+                [1., 0., 0., 0., 0.],
+                [0., 0., 0., 0., 1.],
+                {\ldots},
+                [0., 1., 0., 0., 0.],
+                [1., 0., 0., 0., 0.],
+                [0., 0., 0., 1., 0.]])
+\end{Verbatim}
+            
+    \subsubsection{Combining Label Encoding and One-Hot Encoding into one
+transformation}\label{combining-label-encoding-and-one-hot-encoding-into-one-transformation}
+
+\section{Warning: Newer versions of sklearn pipeline does not work with
+labelbinarizer. search below for "LabelBinarizerPipelineFriendly" for
+more
+info}\label{warning-newer-versions-of-sklearn-pipeline-does-not-work-with-labelbinarizer.-search-below-for-labelbinarizerpipelinefriendly-for-more-info}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelBinarizer}
+         \PY{n}{encoder} \PY{o}{=} \PY{n}{LabelBinarizer}\PY{p}{(}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}1hot} \PY{o}{=} \PY{n}{encoder}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{housing\PYZus{}cat}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}1hot}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} array([[1, 0, 0, 0, 0],
+                [1, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1],
+                {\ldots},
+                [0, 1, 0, 0, 0],
+                [1, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{c+c1}{\PYZsh{} you can get a sparse array instead of a dense Numpy array by sparse\PYZus{}output=True}
+         \PY{n}{encoder2} \PY{o}{=} \PY{n}{LabelBinarizer}\PY{p}{(}\PY{n}{sparse\PYZus{}output}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}1hotSparse} \PY{o}{=} \PY{n}{encoder2}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{housing\PYZus{}cat}\PY{p}{)}
+         \PY{n}{housing\PYZus{}cat\PYZus{}1hotSparse}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} <16512x5 sparse matrix of type '<class 'numpy.int32'>'
+         	with 16512 stored elements in Compressed Sparse Row format>
+\end{Verbatim}
+            
+    \subsection{3.3 Custom Transformers}\label{custom-transformers}
+
+You need to write your own custom transformers from time to time, for
+custom cleanup operations or combining specific attributes.
+
+You want to make it so that your transformers work seamlessly with
+sklearn. Since sklearn relies on duck typing (not inheritance), all you
+need is to create a class and implement three methods: 1. fit()
+(returning self) 2. transform() 3. fit\_transform()
+
+You can use TransformerMixin as a base class for the last one.
+
+If you add BaseEstimator as base class (and avoid \emph{args and *}kargs
+in your constructor) you will get two extra methods (get\_params() and
+set\_params()) that will be useful for \textbf{automatic hyperparameter
+tuning}
+
+Following is a small transformer class that adds the combined attributes
+from \textbf{2.3}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{base} \PY{k}{import} \PY{n}{BaseEstimator}\PY{p}{,} \PY{n}{TransformerMixin}
+         
+         \PY{n}{rooms\PYZus{}ix}\PY{p}{,} \PY{n}{bedrooms\PYZus{}ix}\PY{p}{,} \PY{n}{population\PYZus{}ix}\PY{p}{,} \PY{n}{household\PYZus{}ix} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}
+         
+         \PY{k}{class} \PY{n+nc}{CombinedAttributesAdder}\PY{p}{(}\PY{n}{BaseEstimator}\PY{p}{,} \PY{n}{TransformerMixin}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{add\PYZus{}bedrooms\PYZus{}per\PYZus{}room} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} no *args or **kargs}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}bedrooms\PYZus{}per\PYZus{}room} \PY{o}{=} \PY{n}{add\PYZus{}bedrooms\PYZus{}per\PYZus{}room}
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{rooms\PYZus{}per\PYZus{}household} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{rooms\PYZus{}ix}\PY{p}{]} \PY{o}{/} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{household\PYZus{}ix}\PY{p}{]}
+                 \PY{n}{population\PYZus{}per\PYZus{}household} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{population\PYZus{}ix}\PY{p}{]} \PY{o}{/} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{household\PYZus{}ix}\PY{p}{]}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}bedrooms\PYZus{}per\PYZus{}room}\PY{p}{:}
+                     \PY{n}{bedrooms\PYZus{}per\PYZus{}room} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{bedrooms\PYZus{}ix}\PY{p}{]} \PY{o}{/} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{rooms\PYZus{}ix}\PY{p}{]}
+                     \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{X}\PY{p}{,} \PY{n}{rooms\PYZus{}per\PYZus{}household}\PY{p}{,} \PY{n}{population\PYZus{}per\PYZus{}household}\PY{p}{,} \PY{n}{bedrooms\PYZus{}per\PYZus{}room}\PY{p}{]}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{c\PYZus{}}\PY{p}{[}\PY{n}{X}\PY{p}{,} \PY{n}{rooms\PYZus{}per\PYZus{}household}\PY{p}{,} \PY{n}{population\PYZus{}per\PYZus{}household}\PY{p}{]}
+                 
+         \PY{n}{attr\PYZus{}adder} \PY{o}{=} \PY{n}{CombinedAttributesAdder}\PY{p}{(}\PY{n}{add\PYZus{}bedrooms\PYZus{}per\PYZus{}room}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{housing\PYZus{}extra\PYZus{}attribs} \PY{o}{=} \PY{n}{attr\PYZus{}adder}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{housing}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Hyperparameter}\label{hyperparameter}
+
+hyperparameter is a parameter whose value is \textbf{set before the
+learning process begins}
+
+In the codeblock above, add\_bedrooms\_per\_room is set as a
+hyperparameter (set to True by default)
+
+You can add hyperparameter to gate any data preparation steps that you
+are not 100\% sure about.
+
+     \#\# 3.4 Feature Scaling
+
+Feature scaling is one of the most important transformations to apply to
+your data. ML algorithms \textbf{do not perform well} when input
+numerical attributes have very different scales.
+
+In this example housing data, the total number of rooms range from about
+6 to 39,320 while median incomes range from 0 to 15
+
+There are two common ways to get all attributes to have the same scale:
+1. min-max scaling 2. standardization
+
+\subsubsection{Min-max scaling (aka
+normalization)}\label{min-max-scaling-aka-normalization}
+
+Values are shifted and rescaled so that they end up ranging from 0 to 1.
+Subtract the min value and divide by the max minus the min.
+\textbf{Sklearn has a transformer called MinMaxScaler}
+
+\subsubsection{Standardization}\label{standardization}
+
+Standardization subtracts the mean value and then divides by the
+variance so that the resulting distribution has unit variance.
+Standardization is less affected by outliers compared to min-max
+scaling. \textbf{Sklearn has StandardScaler}
+
+\subsubsection{Warning}\label{warning}
+
+As with all the transformations, it is important to fit the scalers to
+the training data only, not to the full dataset. Only then can you use
+them to transform the training set and the test set.
+
+    \subsection{3.5 Transformation
+Pipelines}\label{transformation-pipelines}
+
+Data transformation steps need to be executed in the right order.
+Sklearn's \textbf{Pipeline} class helps with sequence
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{Pipeline}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+         
+         \PY{n}{num\PYZus{}pipeline} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imputer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{Imputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attribs\PYZus{}adder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{CombinedAttributesAdder}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std\PYZus{}scaler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{housing\PYZus{}num\PYZus{}tr} \PY{o}{=} \PY{n}{num\PYZus{}pipeline}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{housing\PYZus{}num}\PY{p}{)}
+\end{Verbatim}
+
+
+    Sklearn does not handle Pandas DF, but we can write a custom transformer
+for this task.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{base} \PY{k}{import} \PY{n}{BaseEstimator}\PY{p}{,} \PY{n}{TransformerMixin}
+         
+         \PY{k}{class} \PY{n+nc}{DataFrameSelector}\PY{p}{(}\PY{n}{BaseEstimator}\PY{p}{,} \PY{n}{TransformerMixin}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{attribute\PYZus{}names}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attribute\PYZus{}names} \PY{o}{=} \PY{n}{attribute\PYZus{}names}
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb+bp}{self}
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{X}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{attribute\PYZus{}names}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{c+c1}{\PYZsh{} LabelBinarizer that works with Pipeline.}
+         \PY{c+c1}{\PYZsh{} source: https://github.com/scikit\PYZhy{}learn/scikit\PYZhy{}learn/pull/7375/files\PYZsh{}diff\PYZhy{}1e175ddb0d84aad0a578d34553f6f9c6}
+         
+         \PY{k}{class} \PY{n+nc}{LabelBinarizerPipelineFriendly}\PY{p}{(}\PY{n}{LabelBinarizer}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}this would allow us to fit the model based on the X input.\PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{LabelBinarizerPipelineFriendly}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb}{super}\PY{p}{(}\PY{n}{LabelBinarizerPipelineFriendly}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{def} \PY{n+nf}{fit\PYZus{}transform}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb}{super}\PY{p}{(}\PY{n}{LabelBinarizerPipelineFriendly}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{c+c1}{\PYZsh{} define the pipeline for numerical attributes and categorical attributes}
+         
+         \PY{n}{num\PYZus{}attribs} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{housing\PYZus{}num}\PY{p}{)}
+         \PY{n}{cat\PYZus{}attribs} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ocean\PYZus{}proximity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{num\PYZus{}pipeline} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{selector}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{DataFrameSelector}\PY{p}{(}\PY{n}{num\PYZus{}attribs}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imputer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{Imputer}\PY{p}{(}\PY{n}{strategy}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{median}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attribs\PYZus{}adder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{CombinedAttributesAdder}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std\PYZus{}scaler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{cat\PYZus{}pipeline} \PY{o}{=} \PY{n}{Pipeline}\PY{p}{(}\PY{p}{[}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{selector}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{DataFrameSelector}\PY{p}{(}\PY{n}{cat\PYZus{}attribs}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label\PYZus{}binarizer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{LabelBinarizerPipelineFriendly}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{c+c1}{\PYZsh{} combine the two pipelines into a single pipeline using FeatureUnion}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k}{import} \PY{n}{FeatureUnion}
+         
+         \PY{n}{full\PYZus{}pipeline} \PY{o}{=} \PY{n}{FeatureUnion}\PY{p}{(}\PY{n}{transformer\PYZus{}list}\PY{o}{=}\PY{p}{[}
+             \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{num\PYZus{}pipeline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{num\PYZus{}pipeline}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cat\PYZus{}pipeline}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cat\PYZus{}pipeline}\PY{p}{)}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{c+c1}{\PYZsh{} now run the whole pipeline}
+         
+         \PY{n}{housing\PYZus{}prepared} \PY{o}{=} \PY{n}{full\PYZus{}pipeline}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{housing}\PY{p}{)}
+         \PY{n}{housing\PYZus{}prepared}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}93}]:} array([[-1.15604281,  0.77194962,  0.74333089, {\ldots},  0.        ,
+                  0.        ,  0.        ],
+                [-1.17602483,  0.6596948 , -1.1653172 , {\ldots},  0.        ,
+                  0.        ,  0.        ],
+                [ 1.18684903, -1.34218285,  0.18664186, {\ldots},  0.        ,
+                  0.        ,  1.        ],
+                {\ldots},
+                [ 1.58648943, -0.72478134, -1.56295222, {\ldots},  0.        ,
+                  0.        ,  0.        ],
+                [ 0.78221312, -0.85106801,  0.18664186, {\ldots},  0.        ,
+                  0.        ,  0.        ],
+                [-1.43579109,  0.99645926,  1.85670895, {\ldots},  0.        ,
+                  1.        ,  0.        ]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{housing\PYZus{}prepared}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:} (16512, 16)
+\end{Verbatim}
+            
+    \section{4. Select and Train a Model}\label{select-and-train-a-model}
+
+\subsection{4.1 Training and Evaluating on the Training
+Set}\label{training-and-evaluating-on-the-training-set}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
